@@ -82,7 +82,7 @@ mvn clean test -Dheadless=true
 mvn clean test -Dbrowser=firefox
 ```
 
- 4. Run tests on 5 threads in parallel (will open up to 5 browsers, if there are 2, then it will open 2 browser instances)
+ 4. Run tests on 5 threads in parallel (will open up to 5 browsers, if there are 2 feature files, then it will open 2 browser instances)
 ```sh
 mvn clean verify -DthreadCount=5
 ```

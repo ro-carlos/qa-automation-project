@@ -6,11 +6,13 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features",    // Correct path to your feature files
-        glue = "com.automation.stepDefinitions",     // Step definitions package
+        features = "src/test/resources/features",
+        glue = {
+                "com.automation.stepDefinitions",
+        },
         plugin = {
                 "pretty",
-                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm" // Updated plugin for Allure and Cucumber 7
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
         },
         monochrome = true
 )

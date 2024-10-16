@@ -1,27 +1,20 @@
 package com.automation.stepDefinitions.quotation;
 
-import com.automation.base.BaseTest;
+import com.automation.driver.CurrentWebDriverManager;
 import com.automation.pages.quotation.TravelersPage;
+import com.automation.stepDefinitions.home.Hooks;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 
 import java.util.Map;
 
-public class TravelersPageSteps extends BaseTest {
+public class TravelersPageSteps {
 
     private TravelersPage travelersPage;
 
-    @Before
-    public void setUp() {
-        initializeTest();
-    }
-
     @And("I fill out the form with the following traveler details:")
     public void iFillOutTheFormWithTheFollowingTravelerDetails(DataTable dataTable) {
-        travelersPage = new TravelersPage(driver, wait);
+        travelersPage = new TravelersPage(CurrentWebDriverManager.getInstance().getWebDriver(), Hooks.getWait());
 
         Map<String, String> travelerDetails = dataTable.asMap(String.class, String.class);
 
@@ -47,8 +40,4 @@ public class TravelersPageSteps extends BaseTest {
         travelersPage.navigateToCheckout();
     }
 
-    @After
-    public void tearDown() {
-        cleanUpTest();
-    }
 }

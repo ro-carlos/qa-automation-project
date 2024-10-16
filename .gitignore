@@ -88,3 +88,5 @@ nb-configuration.xml
 ## Others
 ##############################
 test-output/
+.allure/
+allure-results/

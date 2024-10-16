@@ -1,4 +1,4 @@
-package com.automation.driver;
+package com.automation.driver.factory;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -23,9 +23,6 @@ public class ChromeDriverCreator extends WebDriverCreator {
             options.addArguments("--headless");
             options.addArguments("--disable-gpu");
             options.addArguments("--window-size=1920,1080");
-        } else {
-            // Add full-screen mode when not headless
-            options.addArguments("--start-maximized");
         }
 
         return new ChromeDriver(options);

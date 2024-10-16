@@ -1,4 +1,4 @@
-package com.automation.driver;
+package com.automation.driver.factory;
 
 import com.automation.utils.Browser;
 import org.openqa.selenium.WebDriver;

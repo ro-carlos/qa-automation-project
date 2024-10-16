@@ -1,27 +1,19 @@
 package com.automation.stepDefinitions.home;
 
-import com.automation.base.BaseTest;
+import com.automation.driver.CurrentWebDriverManager;
 import com.automation.pages.home.HomePage;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-public class HomePageSteps extends BaseTest {
+public class HomePageSteps {
 
     private HomePage homePage;
 
-    @Before
-    public void setUp() {
-        // Initialize driver and browser in Cucumber's Before hook
-        initializeTest();
-    }
-
     @Given("I am on the home page")
     public void iAmOnTheHomePage()  {
-        homePage = new HomePage(driver, wait);
+        homePage = new HomePage(CurrentWebDriverManager.getInstance().getWebDriver(), Hooks.getWait());
     }
 
     @Given("I accept all cookies if available")
@@ -43,11 +35,6 @@ public class HomePageSteps extends BaseTest {
     @When("the spinner disappears")
     public void iShouldSeeTheLoadingSpinnerDisappears() {
         homePage.waitForLoadingSpinnerToDisappear();
-    }
-
-    @After
-    public void tearDown() {
-        cleanUpTest();
     }
 
 }

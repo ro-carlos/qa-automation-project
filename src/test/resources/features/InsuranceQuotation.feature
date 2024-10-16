@@ -1,6 +1,6 @@
-Feature: Quote insurance
+Feature: Insurance quotation
 
-  Scenario: Automate el insurance quotation
+  Scenario: Automate insurance quotation
     Given I am on the home page
     And I accept all cookies if available
     When I navigate to the calculator page

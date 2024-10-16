@@ -1,24 +1,17 @@
 package com.automation.stepDefinitions.quotation;
 
-import com.automation.base.BaseTest;
+import com.automation.driver.CurrentWebDriverManager;
 import com.automation.pages.quotation.CalculatorPage;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.automation.stepDefinitions.home.Hooks;
 import io.cucumber.java.en.And;
 
-public class CalculatorPageSteps extends BaseTest {
+public class CalculatorPageSteps {
 
     private CalculatorPage calculatorPage;
 
-    @Before
-    public void setUp() {
-        // Initialize driver and browser in Cucumber's Before hook
-        initializeTest();
-        calculatorPage = new CalculatorPage(driver, wait);
-    }
-
     @And("I select the travel type {string}")
     public void iSelectTheTravelType(String travelType) {
+        calculatorPage = new CalculatorPage(CurrentWebDriverManager.getInstance().getWebDriver(), Hooks.getWait());
         calculatorPage.selectTravelType(travelType);
     }
 
@@ -38,8 +31,4 @@ public class CalculatorPageSteps extends BaseTest {
         calculatorPage.clickOnViewBudget();
     }
 
-    @After
-    public void tearDown() {
-        cleanUpTest();
-    }
 }

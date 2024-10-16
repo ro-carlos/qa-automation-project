@@ -110,11 +110,14 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
-                    <parallel>methods</parallel>
-                    <threadCount>${threadCount}</threadCount>
+                    <parallel>classesAndMethods</parallel>
+                    <threadCount>${threadCount}</threadCount> <!-- Thread count passed from properties file -->
                     <includes>
                         <include>**/TestRunner.java</include>
                     </includes>
+                    <perCoreThreadCount>true</perCoreThreadCount>
+                    <useUnlimitedThreads>false</useUnlimitedThreads>
+                    <forkCount>1C</forkCount>
                 </configuration>
             </plugin>
         </plugins>

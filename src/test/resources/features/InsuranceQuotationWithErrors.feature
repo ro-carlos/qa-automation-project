@@ -1,5 +1,6 @@
-Feature: Insurance Quotation with errors
+Feature: Insurance Quotation with Errors
 
+  @TC-003
   Scenario: Generate error by adding past date range
     Given I am on the home page
     And I accept all cookies if available
@@ -11,6 +12,7 @@ Feature: Insurance Quotation with errors
     And I click on Ver Presupuesto
     Then I view the error modal
 
+  @TC-004
   Scenario: Generate error by adding return date wrong
     Given I am on the home page
     And I accept all cookies if available

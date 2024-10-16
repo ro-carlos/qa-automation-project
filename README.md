@@ -49,7 +49,7 @@ Install Java 11 and maven.
 * Java
 * Maven
 
-_Check Oracle guide: [Java Versions](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)_ and Maven guide: [Maven Versions](https://maven.apache.org/install.html)
+_Check Oracle guide: [Java Versions](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html),  Maven guide: [Maven Versions](https://maven.apache.org/install.html)
 
 ### Installation
 
@@ -82,7 +82,7 @@ mvn clean test -Dheadless=true
 mvn clean test -Dbrowser=firefox
 ```
 
- 4. Run tests on 5 threads (will open up to 5 browsers, depending on the features file)
+ 4. Run tests on 5 threads in parallel (will open up to 5 browsers, depending on the features file)
 ```sh
 mvn clean verify -DthreadCount=5
 ```

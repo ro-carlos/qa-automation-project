@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -28,6 +29,8 @@ public class BrowserActions {
         this.wait = wait;
         this.actions = new Actions(this.driver);
     }
+
+    // Existing methods...
 
     /**
      * Waits until page is loaded by checking page state using javascript
@@ -60,6 +63,36 @@ public class BrowserActions {
     }
 
     /**
+     * Waits until locator is invisible
+     * @param locator {@link By}
+     *
+     * @return {@link WebElement} retrieves web element
+     */
+    public void waitLocatorForInvisibility(By locator){
+        try{
+            getWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
+            getDriver().findElement(locator);
+        }catch (Exception e){
+        }
+    }
+
+    /**
+     * Checks element visibility
+     * @param element {@link WebElement}
+     *
+     * @return {@code true} if locator is present, {@code false} otherwise
+     */
+    public boolean isElementPresent(WebElement element){
+        try {
+            getWait().until(ExpectedConditions.visibilityOf(element));
+            return true;
+        }catch (TimeoutException e){
+            getLogger().info("Element not present: " + element);
+        }
+        return false;
+    }
+
+    /**
      * Checks locator visibility
      * @param locator {@link By}
      *
@@ -68,7 +101,7 @@ public class BrowserActions {
     public boolean isLocatorPresent(By locator){
         try {
             return waitLocatorForVisibility(locator).isDisplayed();
-        }catch (TimeoutException e){
+        }catch (Exception e){
             getLogger().info("Element not present: " + locator);
         }
         return false;
@@ -119,6 +152,60 @@ public class BrowserActions {
      */
     public void hoverElement(WebElement element){
         getActions().moveToElement(element).perform();
+    }
+
+    /**
+     * Selects an option from a dropdown using visible text
+     * @param element {@link WebElement} dropdown element
+     * @param optionText {@link String} visible text to select
+     */
+    public void selectDropdownOption(WebElement element, String optionText) {
+        Select dropdown = new Select(waitElementForVisibility(element));
+        dropdown.selectByVisibleText(optionText);
+    }
+
+    /**
+     * Selects an option from a dropdown by index
+     * @param element {@link WebElement} dropdown element
+     * @param index {@link int} index to select
+     */
+    public void selectDropdownOptionByIndex(WebElement element, int index) {
+        Select dropdown = new Select(waitElementForVisibility(element));
+        dropdown.selectByIndex(index);
+    }
+
+    /**
+     * Enters text into an input field
+     * @param element {@link WebElement} input field element
+     * @param text {@link String} text to enter
+     */
+    public void enterText(WebElement element, String text) {
+        WebElement inputField = waitElementForVisibility(element);
+        inputField.clear();  // Clear any existing text
+        inputField.sendKeys(text);
+    }
+
+    /**
+     * Scrolls to a specific web element
+     * @param element {@link WebElement} the element to scroll to
+     */
+    public void scrollToElement(WebElement element) {
+        getActions().moveToElement(waitElementForVisibility(element)).perform();
+    }
+
+    /**
+     * Checks if an element is clickable
+     * @param element {@link WebElement} the element to check
+     * @return {@code true} if element is clickable, {@code false} otherwise
+     */
+    public boolean isElementClickable(WebElement element) {
+        try {
+            getWait().until(ExpectedConditions.elementToBeClickable(element));
+            return true;
+        } catch (TimeoutException e) {
+            getLogger().info("Element is not clickable: " + element);
+            return false;
+        }
     }
 
     protected WebDriver getDriver(){

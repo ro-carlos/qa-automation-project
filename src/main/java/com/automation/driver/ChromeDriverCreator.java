@@ -23,6 +23,9 @@ public class ChromeDriverCreator extends WebDriverCreator {
             options.addArguments("--headless");
             options.addArguments("--disable-gpu");
             options.addArguments("--window-size=1920,1080");
+        } else {
+            // Add full-screen mode when not headless
+            options.addArguments("--start-maximized");
         }
 
         return new ChromeDriver(options);

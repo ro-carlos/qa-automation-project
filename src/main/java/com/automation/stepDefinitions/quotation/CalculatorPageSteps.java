@@ -4,6 +4,8 @@ import com.automation.driver.CurrentWebDriverManager;
 import com.automation.pages.quotation.CalculatorPage;
 import com.automation.stepDefinitions.home.Hooks;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import org.junit.Assert;
 
 public class CalculatorPageSteps {
 
@@ -25,10 +27,20 @@ public class CalculatorPageSteps {
         calculatorPage.enterDateRange(0, 15);
     }
 
+    @And("I select dates range {string} {string}")
+    public void iEnterDate(String startDate, String endDate) {
+        calculatorPage.enterDateRange(startDate+" - "+endDate);
+    }
 
     @And("I click on Ver Presupuesto")
     public void iClickOnViewBudget() {
         calculatorPage.clickOnViewBudget();
+    }
+
+    @Then("I view the error modal")
+    public void iViewTheErrorMessage() {
+        Assert.assertTrue("Popup error should be visible",
+                calculatorPage.isErrorMessageVisible());
     }
 
 }

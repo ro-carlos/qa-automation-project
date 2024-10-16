@@ -1,4 +1,4 @@
-Feature: Insurance quotation
+Feature: Insurance Quotation
 
   Scenario: Automate insurance quotation
     Given I am on the home page

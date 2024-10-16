@@ -32,6 +32,9 @@ public class CalculatorPage extends BasePage {
     @FindBy(xpath = "//div[@class='react-datepicker__month-container'][1]//div[@aria-disabled='false'][not (contains(@class, 'datepicker__day--outside-month'))]")
     private WebElement currentMonth;
 
+    @FindBy(css = ".modal-error__info > p")
+    private WebElement modalErrorMessage;
+
     public CalculatorPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -61,8 +64,16 @@ public class CalculatorPage extends BasePage {
         getActions().waitAndClick(dates.get(endDate));
     }
 
+    public void enterDateRange(String fullDate) {
+        getActions().enterText(dateInput, fullDate);
+    }
+
     public void clickOnViewBudget() {
         getActions().waitAndClick(calculateBudgetButton);
+    }
+
+    public boolean isErrorMessageVisible(){
+        return getActions().isElementPresent(modalErrorMessage);
     }
 
 }
